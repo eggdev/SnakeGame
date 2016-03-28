@@ -1,0 +1,33 @@
+
+
+body {
+  background: lightblue;
+  padding: 2px;
+}
+
+.chunk {
+  width: 10px;
+  height: 10px;
+  background: black;
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+
+#head {
+  background-color: orange;
+}
+
+
+.row {
+  position: absolute;
+
+  display: flex;
+  flex-flow: row;
+}
+
+.column {
+  position: absolute;
+
+  display: flex;
+  flex-flow: column;
+}

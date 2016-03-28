@@ -1,0 +1,61 @@
+body {
+  background: black;
+  display: flex;
+  z-index: 0;
+
+}
+
+
+#game-state {
+  background: gray;
+  border: 2px solid white;
+  margin: auto;
+  height: 600px;
+  width: 600px;
+  z-index: 1;
+  display: flex;
+  position: relative;
+  box-sizing: content-box;
+}
+
+#counter {
+  color: white;
+}
+#snake {
+  position: absolute;
+  left: 300px;
+  top: 300px;
+  width: 10px;
+}
+
+#new-snake {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  width: 10px;
+}
+
+.chunk {
+  background: black;
+  height: 10px;
+  width: 10px;
+}
+
+#snack {
+  position: absolute;
+
+  background: black;
+  height: 10px;
+  width: 10px;
+}
+
+
+.row-snake {
+  display: flex;
+  flex-flow: row;
+}
+
+.column-snake {
+  display: flex;
+  flex-flow: column;
+}
