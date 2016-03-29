@@ -1,0 +1,47 @@
+body {
+  background: lightblue;
+}
+
+#game-state {
+  height: 600px;
+  width: 600px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.snake {
+  position: absolute;
+  left: 300px;
+  height: 300px;
+}
+
+.left-snake{
+  display: flex;
+  flex-flow: row-reverse;
+
+}
+
+.right-snake {
+  display: flex;
+  flex-flow: row;
+
+}
+
+.up-snake {
+  display: flex;
+  flex-flow: column;
+
+}
+
+.down-snake{
+  display: flex;
+  flex-flow: column-reverse;
+
+}
+
+
+.chunk {
+  width: 10px;
+  height: 10px;
+  background: black;
+}

@@ -1,8 +1,7 @@
-
-
 body {
   background: lightblue;
-  padding: 2px;
+  display: flex;
+  z-index: 0;
 }
 
 .chunk {
@@ -11,23 +10,25 @@ body {
   background: black;
   box-sizing: border-box;
   border: 1px solid white;
+  position: absolute;
 }
 
-#head {
-  background-color: orange;
+#game-state {
+  background: gray;
+  border: 2px solid white;
+  margin: auto;
+  height: 600px;
+  width: 600px;
+  z-index: 1;
+  display: flex;
+  position: relative;
+  box-sizing: content-box;
 }
 
-
-.row {
+#snack {
   position: absolute;
 
-  display: flex;
-  flex-flow: row;
-}
-
-.column {
-  position: absolute;
-
-  display: flex;
-  flex-flow: column;
+  background: black;
+  height: 10px;
+  width: 10px;
 }

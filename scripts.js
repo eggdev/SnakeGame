@@ -1,12 +1,12 @@
 //Move the snake
 
 
-
 function renderSnake(){
   var chunk = $('<div class="chunk">');
-  var newSnake = $('<div id="snake">').append(chunk);
+  var newSnake = $('<div id="snake">').css({'left':300,'top':300});
 
   $('#game-state').append(newSnake);
+  $('#snake').append(chunk);
 }
 
 
@@ -15,19 +15,35 @@ function moveLeft(){
   var left = $('#snake').position().left;
 
 
+  var chunk = $('<div class="chunk">');
+  chunk.css('position','absolute');
+  chunk.css('top',top);
+  chunk.css('left',left-5);
 
-    $(newSnake).animate({
-      'left': left-=10
-    }, 200);
+  $('#snake').append(chunk);
+
+  $('#snake').children().eq($('#snake').children().length-1).remove();
+
+  $('#snake').css('left',left-5);
 
 }
 function moveUp(){
   var top = $('#snake').position().top;
   var left = $('#snake').position().left;
-    $('#snake').animate({
 
-      'top': top-=10
-    }, 200);
+
+  var chunk = $('<div class="chunk">');
+  chunk.css('position','absolute');
+  chunk.css('top',top-5);
+  chunk.css('left',left);
+
+
+  $('#snake').append(chunk);
+
+  $('#snake').children().eq($('#snake').children().length-1).remove();
+
+  $('#snake').css('top',top-5);
+
 
 
 }
@@ -36,10 +52,20 @@ function moveRight(){
   var top = $('#snake').position().top;
   var left = $('#snake').position().left;
 
-    $('#snake').animate({
 
-      'left': left+=10
-    }, 200);
+  var chunk = $('<div class="chunk">');
+  chunk.css('position','absolute');
+  chunk.css('top',top);
+  chunk.css('left',left+5);
+
+
+  $('#snake').prepend(chunk);
+
+  $('#snake').children().eq($('#snake').children()[0]).remove();
+
+  $('#snake').css('left',left+5);
+
+
 
 
 }
@@ -48,62 +74,54 @@ function moveDown(){
   var top = $('#snake').position().top;
   var left = $('#snake').position().left;
 
-  $('#snake').animate({
+  var chunk = $('<div class="chunk">');
+  chunk.css('position','absolute');
+  chunk.css('top',top+5);
+  chunk.css('left',left);
 
-    'top': top+=10
-  }, 200);
+
+  $('#snake').prepend(chunk);
+
+  $('#snake').children().eq($('#snake').children()[0]).remove();
+
+  $('#snake').css('top',top+5);
+
 }
 
 
 
 function arrowKeys(){
-  var left = setInterval(function(){moveLeft(),1000});
-  var right = setInterval(function(){moveRight(),1000});
-  var up = setInterval(function(){moveUp(),1000});
-  var down = setInterval(function(){moveDown(),1000});
 
 
-  // $('#owl').css({
-  //   'position':'absolute'
-  // })
+
+
   $('body').keydown(function(e){
       //If left arrow is pressed
       if(e.keyCode === 37){
 
-        clearInterval(up);
-        clearInterval(right);
-        clearInterval(down);
-        left;
+
+        moveLeft();
 
       }
       //If up arrow key is pressed
       else if(e.keyCode === 38){
-        // setInterval(function(){moveUp(),1000});
-        clearInterval(left);
-        clearInterval(right);
-        clearInterval(down);
-        up;
+
+        moveUp();
 
 
       }
       //If right arrow is pressed
       else if(e.keyCode === 39){
-        // setInterval(function(){moveRight(),1000});
-        clearInterval(up);
-        clearInterval(left);
-        clearInterval(down);
-        right;
+
+        moveRight();
 
 
       }
 
       //If down arrow is pressed
       else if(e.keyCode === 40){
-        // setInterval(function(){moveDown(),1000});
-        clearInterval(up);
-        clearInterval(left);
-        clearInterval(right);
-        down;
+
+        moveDown();
       }
     checkChanges();
   });
@@ -181,8 +199,7 @@ function placeSnack(){
 
 
 $(document).ready(function(){
-
-
+  arrowKeys();
   placeSnack();
   renderSnake();
 });

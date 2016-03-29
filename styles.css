@@ -1,10 +1,17 @@
 body {
-  background: black;
+  background: lightblue;
   display: flex;
   z-index: 0;
-
 }
 
+.chunk {
+  width: 10px;
+  height: 10px;
+  background: black;
+  box-sizing: border-box;
+  border: 1px solid white;
+  position: absolute;
+}
 
 #game-state {
   background: gray;
@@ -18,44 +25,10 @@ body {
   box-sizing: content-box;
 }
 
-#counter {
-  color: white;
-}
-#snake {
-  position: absolute;
-  left: 300px;
-  top: 300px;
-  width: 10px;
-}
-
-#new-snake {
-  position: absolute;
-  left: 100px;
-  top: 100px;
-  width: 10px;
-}
-
-.chunk {
-  background: black;
-  height: 10px;
-  width: 10px;
-}
-
 #snack {
   position: absolute;
 
   background: black;
   height: 10px;
   width: 10px;
-}
-
-
-.row-snake {
-  display: flex;
-  flex-flow: row;
-}
-
-.column-snake {
-  display: flex;
-  flex-flow: column;
 }
