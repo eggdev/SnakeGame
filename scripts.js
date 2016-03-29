@@ -1,174 +1,92 @@
-//Move the snake
+
+console.log('loaded');
+
+var direction='';
+var snake = [];
+
+
+var snakeTop;
+var snakeLeft;
 
 
 function renderSnake(){
-  var chunk = $('<div class="chunk">');
-  var newSnake = $('<div id="snake">').css({'left':300,'top':300});
-
-  $('#game-state').append(newSnake);
-  $('#snake').append(chunk);
+  $chunk = $('<div class="chunk">');
+  snake.push($chunk);
 }
 
-
-function moveLeft(){
-  var top = $('#snake').position().top;
-  var left = $('#snake').position().left;
-
-
-  var chunk = $('<div class="chunk">');
-  chunk.css('position','absolute');
-  chunk.css('top',top);
-  chunk.css('left',left-5);
-
-  $('#snake').append(chunk);
-
-  $('#snake').children().eq($('#snake').children().length-1).remove();
-
-  $('#snake').css('left',left-5);
-
+function appendSnake(){
+  renderSnake();
+  renderSnake();
+  renderSnake();
+  renderSnake();
+  $('#game-state').append(snake);
 }
-function moveUp(){
-  var top = $('#snake').position().top;
-  var left = $('#snake').position().left;
 
-
-  var chunk = $('<div class="chunk">');
-  chunk.css('position','absolute');
-  chunk.css('top',top-5);
-  chunk.css('left',left);
-
-
-  $('#snake').append(chunk);
-
-  $('#snake').children().eq($('#snake').children().length-1).remove();
-
-  $('#snake').css('top',top-5);
-
-
-
-}
+appendSnake();
 
 function moveRight(){
-  var top = $('#snake').position().top;
-  var left = $('#snake').position().left;
+  var oldTop = snake[0].position().top;
+  var oldLeft= snake[0].position().left;
+  snake.unshift(snake.pop());
+  snake[0].css('left',oldLeft+10);
+  snake[0].css('top',oldTop);
+}
 
+function moveLeft(){
+  var oldTop = snake[0].position().top;
+  var oldLeft = snake[0].position().left;
+  snake.unshift(snake.pop());
+  snake[0].css('left',oldLeft-10);
+  snake[0].css('top',oldTop);
+}
 
-  var chunk = $('<div class="chunk">');
-  chunk.css('position','absolute');
-  chunk.css('top',top);
-  chunk.css('left',left+5);
-
-
-  $('#snake').prepend(chunk);
-
-  $('#snake').children().eq($('#snake').children()[0]).remove();
-
-  $('#snake').css('left',left+5);
-
-
-
-
+function moveUp(){
+  var oldTop = snake[0].position().top;
+  var oldLeft = snake[0].position().left;
+  snake.unshift(snake.pop());
+  snake[0].css('top',oldTop-10);
+  snake[0].css('left',oldLeft);
 }
 
 function moveDown(){
-  var top = $('#snake').position().top;
-  var left = $('#snake').position().left;
-
-  var chunk = $('<div class="chunk">');
-  chunk.css('position','absolute');
-  chunk.css('top',top+5);
-  chunk.css('left',left);
-
-
-  $('#snake').prepend(chunk);
-
-  $('#snake').children().eq($('#snake').children()[0]).remove();
-
-  $('#snake').css('top',top+5);
-
+  var oldTop = snake[0].position().top;
+  var oldLeft = snake[0].position().left;
+  snake.unshift(snake.pop());
+  snake[0].css('top',oldTop+10);
+  snake[0].css('left',oldLeft);
 }
 
 
-
-function arrowKeys(){
-
-
-
-
-  $('body').keydown(function(e){
-      //If left arrow is pressed
-      if(e.keyCode === 37){
-
-
-        moveLeft();
-
-      }
-      //If up arrow key is pressed
-      else if(e.keyCode === 38){
-
-        moveUp();
-
-
-      }
-      //If right arrow is pressed
-      else if(e.keyCode === 39){
-
-        moveRight();
-
-
-      }
-
-      //If down arrow is pressed
-      else if(e.keyCode === 40){
-
-        moveDown();
-      }
-    checkChanges();
-  });
-}
-
-
-function disablePlay() {
-  $('body').unbind('keydown');
-}
-
-function checkChanges(){
-  var $snakeHeadTop = $('#snake').position().top;
-  var $snakeHeadLeft = $('#snake').position().left;
-
-  var lastTop = $('#snake').css('top');
-  var lastLeft = $('#snake').css('left');
-
-  var snackTop = $('#snack').position().top;
-  var snackLeft = $('#snack').position().left;
-
-  var chunk = $('<div class="chunk">');
-
-
-  if($($snakeHeadTop !== lastTop)){
-    lastTop = $snakeHeadTop;
-
-    if($($snakeHeadLeft !== lastLeft)){
-      lastLeft = $snakeHeadLeft;
-
-      if(lastTop === snackTop && lastLeft===snackLeft){
-        $('#snack').remove();
-        $('#snake').append(chunk);
-        placeSnack();
-      }
-
-      else if((lastTop <= -1) || (lastTop >= 591)){
-        alert("You Lose!");
-        disablePlay();
-      }
-      else if((lastLeft <= -1) || (lastLeft >= 591)){
-        alert("You Lose!");
-        disablePlay();
-      }
+$(document).keydown(function(e){
+  //Left Key
+  if(e.keyCode === 37){
+    if(direction != 'right'){
+      direction = 'left';
+      moveLeft();
     }
   }
-}
-
+  //Up Key
+  else if(e.keyCode === 38){
+    if(direction !='down'){
+      direction = 'up';
+      moveUp();
+    }
+  }
+  //Right Key
+  else if(e.keyCode === 39){
+    if(direction !='left'){
+      direction = 'right';
+      moveRight();
+    }
+  }
+  //Down Key
+  else if(e.keyCode === 40){
+    if(direction != 'up'){
+      direction = 'down';
+      moveDown();
+    }
+  }
+});
 
 /// Place Snack function
 
@@ -187,6 +105,7 @@ function getRandomWidth(){
   return randomWidth;
 
 }
+
 function placeSnack(){
   var snack = $("<div id='snack'>");
   snack.css({
@@ -196,10 +115,63 @@ function placeSnack(){
   $('#game-state').append(snack);
 }
 
+function checkSnack(){
+
+  snakeTop = snake[0].position().top;
+  snakeLeft = snake[0].position().left;
+
+  var fruitTop = $('#snack').position().top;
+  var fruitLeft = $('#snack').position().left;
+  var chunk = $('<div class="chunk">');
+
+  if(snakeTop == fruitTop && snakeLeft == fruitLeft){
+
+    $('#snack').remove();
+    snake.push(chunk);
+    //snake.unshift(chunk); was really cool. Made it start at the top again. Could have some wormhole functionality
+    $('#game-state').append(snake);
+    placeSnack();
+  }
+}
+
+function move(){
+
+  switch(direction){
+    case 'right':
+
+      moveRight();
+      direction = 'right';
+      break
+
+    case 'left':
+
+      moveLeft();
+      direction = 'left';
+      break
+
+    case 'down':
+
+      moveDown();
+      direction = 'down';
+      break
+
+    case 'up':
+
+      moveUp();
+      direction = 'up';
+      break
+
+    }
+}
 
 
 $(document).ready(function(){
-  arrowKeys();
   placeSnack();
-  renderSnake();
+  setInterval(function(){
+    move();
+  }, 80);
+
+  setInterval(function(){
+    checkSnack();
+  }, 10);
 });
