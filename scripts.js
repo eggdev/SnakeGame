@@ -9,19 +9,26 @@ var invincible = false;
 var snakeTop;
 var snakeLeft;
 
-
+// Sets up the Snake with 1 chunk
 function renderSnake(){
   $chunk = $('<div class="chunk">');
   snake.push($chunk);
 }
 
+//Appends the snake to the GameState
 function appendSnake(){
   renderSnake();
   $('#game-state').append(snake);
 }
 
+//Calls the append Snake
 appendSnake();
 
+
+
+//Movement functions remove the last 'chunk' in the snake array and positions it at the front of the snake array, 10 pixels ahead of the current snake position based on the direction selected.
+
+//Function to move the snake one position to the right
 function moveRight(){
   var oldTop = snake[0].position().top;
   var oldLeft= snake[0].position().left;
@@ -29,7 +36,7 @@ function moveRight(){
   snake[0].css('left',oldLeft+10);
   snake[0].css('top',oldTop);
 }
-
+//Function to move the snake one position to the left
 function moveLeft(){
   var oldTop = snake[0].position().top;
   var oldLeft = snake[0].position().left;
@@ -38,6 +45,7 @@ function moveLeft(){
   snake[0].css('top',oldTop);
 }
 
+//Function to move the snake one position to the top
 function moveUp(){
   var oldTop = snake[0].position().top;
   var oldLeft = snake[0].position().left;
@@ -45,6 +53,8 @@ function moveUp(){
   snake[0].css('top',oldTop-10);
   snake[0].css('left',oldLeft);
 }
+
+//Function to move the snake one position to the bottom
 
 function moveDown(){
   var oldTop = snake[0].position().top;
@@ -335,7 +345,7 @@ function randomSnake(){
 }
 
 function winCondition(){
-  if(snake.length == 3600){
+  if(snake.length == $('#game-state').height() * $('#game-state').width()/100){
     alert('Holy Shit. You won');
   }
 }
@@ -388,6 +398,8 @@ function endGame(){
     'opacity': '1',
     'z-index': '1'
   });
+  $('#score').text('Score: '+snake.length);
+
   disablePlay();
 }
 

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Snake Game</title>
     <link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
 
@@ -11,25 +12,46 @@
     </div>
 
     <div id='instructions'>
-      <h1>Instructions</h1>
+      <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SNAKE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+      <h2>&nbsp;&nbsp;&nbsp;INSTRUCTIONS&nbsp;&nbsp;&nbsp;</h2>
       <div id='pointers'>
         <div id='left'>
+          <img src="/Users/deveggers/wdi/SnakeGame/snakeeat.gif" alt="This will display an animated GIF" />
+          <h3>&nbsp;&nbsp;Get Bigger!&nbsp;&nbsp;</h3>
+        </div>
 
-          <h2>Eat Red Chunks to Get Bigger</h2>
-        </div>
+
         <div id='right'>
-          <h2>Eat Stars to become Invincible!</h2>
+          <svg width="100px" height="101px" viewBox="0 0 202 203">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <polygon id="Star-1" stroke="#979797" fill="#D8D8D8" points="101 152 42.2214748 182.901699 53.4471742 117.45085 5.89434837 71.0983006 71.6107374 61.5491503 101 2 130.389263 61.5491503 196.105652 71.0983006 148.552826 117.45085 159.778525 182.901699 "></polygon>
+            </g>
+        </svg>
+          <h3>&nbsp;&nbsp;Become Invincible!&nbsp;&nbsp;</h3>
         </div>
+      </div>
+      <div id='extra'>
+        <h3>&nbsp;&nbsp;Watch out for Yourself!&nbsp;&nbsp;</h3>
+        <h3>&nbsp;&nbsp;The Walls Are Lava!&nbsp;&nbsp;</h3>
+      </div>
+      <div id='button'>
+        <h3>&nbsp;&nbsp;Click for Next&nbsp;&nbsp;</h3>
       </div>
     </div>
 
     <div id='start'>
-      <h1>Start Game</h1>
-      <h1 id='timer'>3</h1>
+      <h1>&nbsp;&nbsp;&nbsp;&nbsp;START GAME&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+      <h1 id='timer'>&nbsp;&nbsp;3&nbsp;&nbsp;</h1>
     </div>
 
     <div id='lose'>
-      <h1>YOU LOSE</h1>
+      <h1>&nbsp;&nbsp;&nbsp;&nbsp;GAME OVER&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+
+      <h2 id='score'></h2>
+
+      <div id='button'>
+        <h3>&nbsp;&nbsp;Try Again?&nbsp;&nbsp;</h3>
+      </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

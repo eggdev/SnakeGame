@@ -1,7 +1,9 @@
 body {
-  background: lightblue;
+  background: url('https://media.giphy.com/media/xTiTnfKp2eiOqyvMZi/giphy.gif');
+  background-size: cover;
   display: flex;
   z-index: 0;
+  font-family: 'Montserrat Subrayada', sans-serif;
 }
 
 .chunk {
@@ -13,38 +15,10 @@ body {
   position: absolute;
 }
 
-.example-chunk1{
-  width: 10px;
-  height: 10px;
-  background: black;
-  box-sizing: border-box;
-  border: 1px solid white;
-  position: absolute;
-  left: 100px;
-}
-.example-chunk2{
-  width: 10px;
-  height: 10px;
-  background: black;
-  box-sizing: border-box;
-  border: 1px solid white;
-  position: absolute;
-  left: 90px;
-}
-.example-chunk3{
-  width: 10px;
-  height: 10px;
-  background: black;
-  box-sizing: border-box;
-  border: 1px solid white;
-  position: absolute;
-  left: 80px;
-}
-
-
 #game-state {
-  background: gray;
-  border: 2px solid white;
+  background: url('https://s-media-cache-ak0.pinimg.com/736x/22/cb/f2/22cbf28a6a79cb48d46629c24907a470.jpg');
+  background-size: cover;
+  border: 2px solid red;
   margin: auto;
   height: 600px;
   width: 600px;
@@ -52,8 +26,29 @@ body {
   display: flex;
   position: relative;
   box-sizing: content-box;
-
 }
+@media only screen and (max-height: 600px){
+  #game-state{
+    height: 400px;
+    width: 400px;
+  }
+}
+
+@media only screen and (max-height: 500px){
+  #game-state{
+    height: 300px;
+    width: 300px;
+  }
+}
+
+@media only screen and (max-height: 400px){
+  #game-state{
+    height: 200px;
+    width: 200px;
+  }
+}
+
+
 
 #snack {
   position: absolute;
@@ -75,7 +70,7 @@ body {
   text-align: center;
   display: flex;
   align-content: center;
-  justify-content: space-around;
+  /*justify-content: space-between;*/
   flex-direction: column;
   color: white;
   position: absolute;
@@ -87,25 +82,46 @@ body {
   height: 100%;
   background: rgba(0,0,0,0.8);
 }
+#instructions h1 {
+  font-size: 60px;
+  line-height: 10px;
+}
+#instructions h2 {
+  font-size: 35px;
+  line-height: 10px;
+}
+#instructions h3 {
+  font-size: 25px;
+  line-height: 10px;
+}
+
+#button {
+  color: red;
+  cursor: pointer;
+}
 
 
 #pointers {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-content: space-between;
+  align-content: center;
+  height: 250px;
 }
 
 #left {
   width: 40%;
-  height: 40%;
+  height: 200px;
 }
+
+#left img {
+  height: 100px;
+}
+
 #right {
   width: 40%;
-  height: 40%;
+  height: 200px;
 }
-
-
 
 #start {
   text-align: center;
@@ -124,10 +140,15 @@ body {
   background: rgba(0,0,0,0.8);
 }
 
+#start h1{
+  cursor: pointer;
+}
+
 #lose {
+  text-align: center;
   display: flex;
   align-content: center;
-  justify-content: center;
+  flex-direction: column;
   color: white;
   position: absolute;
   left: 20%;
