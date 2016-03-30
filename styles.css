@@ -9,7 +9,7 @@ body {
   height: 10px;
   background: black;
   box-sizing: border-box;
-  border: 1px solid white;
+  border: 2px solid gray;
   position: absolute;
 }
 
@@ -23,6 +23,7 @@ body {
   display: flex;
   position: relative;
   box-sizing: content-box;
+  
 }
 
 #snack {

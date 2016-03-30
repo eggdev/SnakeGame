@@ -63,6 +63,7 @@ $(document).keydown(function(e){
     if(direction != 'right'){
       direction = 'left';
       moveLeft();
+      checkSnack();
     }
   }
   //Up Key
@@ -70,6 +71,7 @@ $(document).keydown(function(e){
     if(direction !='down'){
       direction = 'up';
       moveUp();
+      checkSnack();
     }
   }
   //Right Key
@@ -77,6 +79,7 @@ $(document).keydown(function(e){
     if(direction !='left'){
       direction = 'right';
       moveRight();
+      checkSnack();
     }
   }
   //Down Key
@@ -84,6 +87,7 @@ $(document).keydown(function(e){
     if(direction != 'up'){
       direction = 'down';
       moveDown();
+      checkSnack();
     }
   }
 });
@@ -127,6 +131,8 @@ function checkSnack(){
   if(snakeTop == fruitTop && snakeLeft == fruitLeft){
 
     $('#snack').remove();
+    chunk.css('top',snakeTop);
+    chunk.css('left',snakeLeft);
     snake.push(chunk);
     //snake.unshift(chunk); was really cool. Made it start at the top again. Could have some wormhole functionality
     $('#game-state').append(snake);
@@ -141,27 +147,41 @@ function move(){
 
       moveRight();
       direction = 'right';
+      checkSnack();
       break
 
     case 'left':
 
       moveLeft();
       direction = 'left';
+      checkSnack();
       break
 
     case 'down':
 
       moveDown();
       direction = 'down';
+      checkSnack();
       break
 
     case 'up':
 
       moveUp();
       direction = 'up';
+      checkSnack();
       break
 
     }
+}
+
+// I need it to be 765.5 height and 765.5 width so that it fits all the colors. Talk to teachers...
+
+
+function colorSnake(){
+  for(var i=0;i<snake.length;i++){
+    snake[i].css('background','rgb('+r+',0,0)');
+    r+=10;
+  }
 }
 
 
@@ -169,6 +189,8 @@ $(document).ready(function(){
   placeSnack();
   setInterval(function(){
     move();
+    colorSnake();
+    checkSnack();
   }, 80);
 
   setInterval(function(){
