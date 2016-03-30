@@ -359,32 +359,31 @@ function instructions(){
       'z-index': '0'
     });
 
-    $('#start').animate({
+    $('#start').css({
       'opacity': '1',
       'z-index': '1'
-    }, 1000)
+    })
+    startGame();
   })
 
 }
 
 function startGame(){
-  var timer = 3;
-  $('#start').click(function(){
-    $('#start').animate({
-      'opacity': '0',
-      'z-index': '0'
-    }, 3000);
+  var timer = 5;
+  $('#start').animate({
+    'opacity': '0',
+    'z-index': '0'
+  }, 5000);
 
-    setInterval(function(){
-      timer -= 1;
-      $('#timer').text(timer);
-    },1000);
+  setInterval(function(){
+    timer -= 1;
+    $('#timer').text(timer);
+  },1000);
 
 
-    setTimeout(function(){
-      direction = 'right';
-    }, 3000);
-  });
+  setTimeout(function(){
+    direction = 'right';
+  }, 5000);
 }
 
 function restart(){
@@ -398,7 +397,7 @@ function endGame(){
     'opacity': '1',
     'z-index': '1'
   });
-  $('#score').text('Score: '+snake.length);
+  $('#score').text('Snake Length:   '+snake.length);
 
   disablePlay();
 }
@@ -406,8 +405,6 @@ function endGame(){
 $(document).ready(function(){
 
   instructions();
-
-  startGame();
 
   placeSnack();
 
