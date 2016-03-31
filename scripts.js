@@ -190,10 +190,14 @@ function checkStar(){
     invincible = true;
     setTimeout(function(){
       invincible = false;
-    }, 7000);
+    }, 9000);
     setTimeout(function(){
       placeStar();
-    }, 20000);
+    }, 27000);
+    $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
+    setTimeout(function(){
+      $('#starpower').remove();
+    }, 10000);
   }
 }
 
@@ -203,6 +207,8 @@ function disablePlay() {
   for (var i = 0 ; i < highestTimeoutId ; i++) {
     clearTimeout(i);
   }
+  $('#background').remove();
+  $('body').append('<audio autoplay="autoplay" id="gameover" src="./Audio/GameOver.mp3"></audio>')
 }
 
 function checkChanges(){
@@ -374,6 +380,8 @@ function startGame(){
     'opacity': '0',
     'z-index': '0'
   }, 5000);
+
+  $('body').append('<audio autoplay="autoplay" src="./Audio/Background.mp3" id="background"></audio>')
 
   setInterval(function(){
     timer -= 1;
