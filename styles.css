@@ -113,7 +113,7 @@ body {
 }
 
 #left {
-  width: 40%;
+  width: 29%;
   height: 200px;
 }
 
@@ -121,8 +121,16 @@ body {
   height: 100px;
 }
 
+#center{
+  width: 29%;
+  height: 200px;
+}
+#center img {
+  height: 100px;
+}
+
 #right {
-  width: 40%;
+  width: 29%;
   height: 200px;
 }
 
