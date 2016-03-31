@@ -58,3 +58,11 @@ The Snake is able to detect whether it has collided with the walls of the Game-S
 Additionally, the Snake will check whether it has collided with it's own body by checking to see if the Top of the Head and the Left of the Head match anyone of chunks in the body, depending on the direction that the snake is presently moving.
 
 As long as the Snake is not under the magical spell of the invincibility star, these collision functions can occur. During the time that the Snake is invincible (after it gobbles up the star on the board) it is able to move through itself, as well as the borders.
+
+
+### Audio
+
+Audio sources are from
+  * Mario Kart - Star Power
+  * Legend of Zelda Ocarina of Time - Dodongo's Cavern
+  * Game Over Sound Effect found on Youtube

@@ -207,8 +207,6 @@ function disablePlay() {
   for (var i = 0 ; i < highestTimeoutId ; i++) {
     clearTimeout(i);
   }
-  $('#background').remove();
-  $('body').append('<audio autoplay="autoplay" id="gameover" src="./Audio/GameOver.mp3"></audio>')
 }
 
 function checkChanges(){
@@ -406,6 +404,9 @@ function endGame(){
     'z-index': '1'
   });
   $('#score').text('Snake Length:   '+snake.length);
+
+  $('#background').remove();
+  $('body').append('<audio autoplay="autoplay" id="gameover" src="./Audio/GameOver.mp3"></audio>')
 
   disablePlay();
 }
