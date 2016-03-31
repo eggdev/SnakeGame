@@ -211,10 +211,10 @@ function checkChanges(){
   snakeLeft = snake[0].position().left;
   //If the snake is not invincible, it can lose the game
   if(invincible == false){
-    if((snakeTop <= -1) || (snakeTop >= 591)){
+    if((snakeTop <= -1) || (snakeTop >= $('#game-state').height())){
      endGame();
    }
-   else if((snakeLeft <= -1) || (snakeLeft >= 591)){
+   else if((snakeLeft <= -1) || (snakeLeft >= $('#game-state').width())){
      endGame();
    }
   }
@@ -425,4 +425,5 @@ $(document).ready(function(){
     snakeCollision();
     checkStar();
   }, 10);
+
 });
