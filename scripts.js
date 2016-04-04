@@ -174,6 +174,14 @@ function checkSnack(){
   }
 
 }
+// function runThroughWalls(){
+//   if (invincible=== true){
+//     If snake head left === 0
+//      Move Snake should change to the other side of the board
+//     Else if snake head left === width
+//      Move snake head to the 0 side of left
+//   }
+// }
 
 function checkStar(){
 
