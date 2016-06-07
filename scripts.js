@@ -25,7 +25,6 @@ function appendSnake(){
 appendSnake();
 
 
-
 //Movement functions remove the last 'chunk' in the snake array and positions it at the front of the snake array, 10 pixels ahead of the current snake position based on the direction selected.
 
 //Function to move the snake one position to the right
@@ -151,14 +150,12 @@ function placeStar(){
 function checkSnack(){
 
   //This function checks to see if a snack has been eaten
-
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
 
   var fruitTop = $('#snack').position().top;
   var fruitLeft = $('#snack').position().left;
   var chunk = $('<div class="chunk">');
-
 
   if(snakeTop == fruitTop && snakeLeft == fruitLeft){
     //If it has been eaten, it removes the snack, and pushes a new chunk into the snake at the proper position of the snake, then re-appends the snake to the game-state
@@ -173,6 +170,26 @@ function checkSnack(){
     placeSnack();
   }
 
+  var starTop = $('#star').position().top
+  var starLeft = $('#star').position().left
+
+  if( starTop || starLeft ){
+    if( snakeTop == starTop && snakeLeft == starLeft ){
+      $('#star').remove();
+      invincible = true;
+      setTimeout(function(){
+        invincible = false;
+      }, 9000);
+      setTimeout(function(){
+        placeStar();
+      }, 27000);
+
+      $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
+      setTimeout(function(){
+        $('#starpower').remove();
+      }, 10000);
+    }
+  }
 }
 // function runThroughWalls(){
 //   if (invincible=== true){
@@ -184,28 +201,18 @@ function checkSnack(){
 // }
 
 function checkStar(){
-
   //This function checks to see if a star has been eaten
-
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
 
   var starTop = $('#star').position().top;
   var starLeft = $('#star').position().left;
 
-  if(snakeTop == starTop && snakeLeft == starLeft){
-    $('#star').remove();
-    invincible = true;
-    setTimeout(function(){
-      invincible = false;
-    }, 9000);
-    setTimeout(function(){
-      placeStar();
-    }, 27000);
-    $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
-    setTimeout(function(){
-      $('#starpower').remove();
-    }, 10000);
+
+
+  if(snakeTop === starTop && snakeLeft === starLeft){
+    console.log(' true' );
+
   }
 }
 
@@ -286,38 +293,34 @@ function move(){
       moveRight();
       direction = 'right';
     //Also want to confirm that a snack has not been eaten.
+      checkStar();
       checkSnack();
       break
-
     case 'left':
     //If direction is set to left, call the move left function, and reset the direction to left
-
       moveLeft();
       direction = 'left';
       //Also want to confirm that a snack has not been eaten.
+      checkStar();
       checkSnack();
       break
-
     case 'down':
-
     //If direction is set to down, call the move down function, and reset the direction to down
-
       moveDown();
       direction = 'down';
       //Also want to confirm that a snack has not been eaten.
+      checkStar();
       checkSnack();
       break
-
     case 'up':
 
     //If direction is set to up, call the move up function, and reset the direction to up
-
       moveUp();
       direction = 'up';
       //Also want to confirm that a snack has not been eaten.
+      checkStar();
       checkSnack();
       break
-
     }
 }
 
@@ -434,6 +437,7 @@ $(document).ready(function(){
     colorSnake();
     randomSnake();
     colorStar();
+    checkStar();
   }, 80);
 
   setInterval(function(){
