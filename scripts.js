@@ -169,27 +169,6 @@ function checkSnack(){
     //Places a new snack on the board
     placeSnack();
   }
-
-  var starTop = $('#star').position().top
-  var starLeft = $('#star').position().left
-
-  if( starTop || starLeft ){
-    if( snakeTop == starTop && snakeLeft == starLeft ){
-      $('#star').remove();
-      invincible = true;
-      setTimeout(function(){
-        invincible = false;
-      }, 9000);
-      setTimeout(function(){
-        placeStar();
-      }, 27000);
-
-      $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
-      setTimeout(function(){
-        $('#starpower').remove();
-      }, 10000);
-    }
-  }
 }
 // function runThroughWalls(){
 //   if (invincible=== true){
@@ -208,11 +187,20 @@ function checkStar(){
   var starTop = $('#star').position().top;
   var starLeft = $('#star').position().left;
 
-
-
   if(snakeTop === starTop && snakeLeft === starLeft){
-    console.log(' true' );
+    $('#star').remove();
+    invincible = true;
+    setTimeout(function(){
+      invincible = false;
+    }, 9000);
+    setTimeout(function(){
+      placeStar();
+    }, 27000);
 
+    $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
+    setTimeout(function(){
+      $('#starpower').remove();
+    }, 10000);
   }
 }
 
@@ -431,13 +419,13 @@ $(document).ready(function(){
   placeStar();
 
   restart();
-
+  
+  checkStar();
   setInterval(function(){
     move();
     colorSnake();
     randomSnake();
     colorStar();
-    checkStar();
   }, 80);
 
   setInterval(function(){
