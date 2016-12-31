@@ -28,29 +28,6 @@ body {
   position: relative;
   box-sizing: content-box;
 }
-@media only screen and (max-height: 600px){
-  #game-state{
-    height: 400px;
-    width: 400px;
-  }
-}
-
-@media only screen and (max-height: 500px){
-  #game-state{
-    height: 300px;
-    width: 300px;
-  }
-}
-
-@media only screen and (max-height: 400px){
-  #game-state{
-    height: 200px;
-    width: 200px;
-  }
-}
-
-
-
 #snack {
   position: absolute;
   background: red;
@@ -64,6 +41,8 @@ body {
   position: absolute;
   height: 10px;
   width: 10px;
+  border: 1px solid white;
+  box-sizing: border-box;
   background-size: cover;
 }
 
@@ -174,4 +153,25 @@ body {
   background: -webkit-linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
   background: -moz-linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
   background: -linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
+}
+
+@media only screen and (max-height: 600px){
+  #game-state{
+    height: 400px;
+    width: 400px;
+  }
+}
+
+@media only screen and (max-height: 500px){
+  #game-state{
+    height: 300px;
+    width: 300px;
+  }
+}
+
+@media only screen and (max-height: 400px){
+  #game-state{
+    height: 200px;
+    width: 200px;
+  }
 }

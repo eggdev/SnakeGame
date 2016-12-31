@@ -1,13 +1,12 @@
+const game = {};
 
-console.log('loaded');
+let direction='';
+const snake = [];
 
-var direction='';
-var snake = [];
+game.invincible = false;
+game.snakeTop;
+game.snakeLeft;
 
-var invincible = false;
-
-var snakeTop;
-var snakeLeft;
 
 // Sets up the Snake with 1 chunk
 function renderSnake(){
@@ -29,16 +28,16 @@ appendSnake();
 
 //Function to move the snake one position to the right
 function moveRight(){
-  var oldTop = snake[0].position().top;
-  var oldLeft= snake[0].position().left;
+  let oldTop = snake[0].position().top;
+  let oldLeft= snake[0].position().left;
   snake.unshift(snake.pop());
   snake[0].css('left',oldLeft+10);
   snake[0].css('top',oldTop);
 }
 //Function to move the snake one position to the left
 function moveLeft(){
-  var oldTop = snake[0].position().top;
-  var oldLeft = snake[0].position().left;
+  let oldTop = snake[0].position().top;
+  let oldLeft = snake[0].position().left;
   snake.unshift(snake.pop());
   snake[0].css('left',oldLeft-10);
   snake[0].css('top',oldTop);
@@ -46,8 +45,8 @@ function moveLeft(){
 
 //Function to move the snake one position to the top
 function moveUp(){
-  var oldTop = snake[0].position().top;
-  var oldLeft = snake[0].position().left;
+  let oldTop = snake[0].position().top;
+  let oldLeft = snake[0].position().left;
   snake.unshift(snake.pop());
   snake[0].css('top',oldTop-10);
   snake[0].css('left',oldLeft);
@@ -56,8 +55,8 @@ function moveUp(){
 //Function to move the snake one position to the bottom
 
 function moveDown(){
-  var oldTop = snake[0].position().top;
-  var oldLeft = snake[0].position().left;
+  let oldTop = snake[0].position().top;
+  let oldLeft = snake[0].position().left;
   snake.unshift(snake.pop());
   snake[0].css('top',oldTop+10);
   snake[0].css('left',oldLeft);
@@ -106,7 +105,7 @@ $(document).keydown(function(e){
 function getRandomHeight(){
 
   //Grabs a random height that is within the game-state
-  var randomHeight = Math.floor(Math.random()*$('#game-state').height());
+  let randomHeight = Math.floor(Math.random()*$('#game-state').height());
 
   randomHeight = Math.floor(randomHeight/10)*10;
 
@@ -115,7 +114,7 @@ function getRandomHeight(){
 function getRandomWidth(){
 
   //Grabs a random number that is within the width of the game-state
-  var randomWidth = Math.floor(Math.random()*$('#game-state').width());
+  let randomWidth = Math.floor(Math.random()*$('#game-state').width());
 
   randomWidth = Math.floor(randomWidth/10)*10;
 
@@ -125,7 +124,7 @@ function getRandomWidth(){
 
 function placeSnack(){
   //This funciton will get a random position and will place a snack on the game-state
-  var snack = $("<div id='snack'>");
+  let snack = $("<div id='snack'>");
   snack.css({
     'top': getRandomHeight(),
     'left': getRandomWidth()
@@ -135,13 +134,14 @@ function placeSnack(){
 
 
 function placeStar(){
-  //This funciton will get a random position and will place a star on the game-state
-  var star = $('<svg id="star" width="10px" height="10px" viewBox="0 0 10 10"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><polygon id="Star-1" stroke="#979797" fill="#D8D8D8" sketch:type="MSShapeGroup" points="5 7.5 2.06107374 9.04508497 2.62235871 5.77254249 0.244717419 3.45491503 3.53053687 2.97745751 5 0 6.46946313 2.97745751 9.75528258 3.45491503 7.37764129 5.77254249 7.93892626 9.04508497 "></polygon></g></svg>');
+  //This funciton will get a random position and will place a "star" on the game-state
+  let star = $('<div id="star">');
 
   star.css({
     'top': getRandomHeight(),
     'left': getRandomWidth()
   });
+
   $('#game-state').append(star);
 }
 
@@ -153,9 +153,9 @@ function checkSnack(){
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
 
-  var fruitTop = $('#snack').position().top;
-  var fruitLeft = $('#snack').position().left;
-  var chunk = $('<div class="chunk">');
+  let fruitTop = $('#snack').position().top;
+  let fruitLeft = $('#snack').position().left;
+  let chunk = $('<div class="chunk">');
 
   if(snakeTop == fruitTop && snakeLeft == fruitLeft){
     //If it has been eaten, it removes the snack, and pushes a new chunk into the snake at the proper position of the snake, then re-appends the snake to the game-state
@@ -170,32 +170,34 @@ function checkSnack(){
     placeSnack();
   }
 }
-// function runThroughWalls(){
-//   if (invincible=== true){
-//     If snake head left === 0
-//      Move Snake should change to the other side of the board
-//     Else if snake head left === width
-//      Move snake head to the 0 side of left
-//   }
-// }
 
 function checkStar(){
   //This function checks to see if a star has been eaten
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
+  let starTop;
+  let starLeft;
+  if($('#star').position().top != undefined){
+    starTop = $('#star').position().top;
+  }
+  if($('#star').position().left != undefined){
+    starLeft = $('#star').position().left;
+  }
 
-  var starTop = $('#star').position().top;
-  var starLeft = $('#star').position().left;
-
-  if(snakeTop === starTop && snakeLeft === starLeft){
+  if(snakeTop == starTop && snakeLeft == starLeft){
     $('#star').remove();
-    invincible = true;
+    game.invincible = true;
+    console.log(game.invincible);
+
     setTimeout(function(){
-      invincible = false;
-    }, 9000);
+
+      game.invincible = false;
+      console.log(game.invincible);
+
+    }, 10000);
     setTimeout(function(){
       placeStar();
-    }, 27000);
+    }, 60000);
 
     $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
     setTimeout(function(){
@@ -206,8 +208,8 @@ function checkStar(){
 
 function disablePlay() {
   //Clears all timeouts.
-  var highestTimeoutId = setTimeout(";");
-  for (var i = 0 ; i < highestTimeoutId ; i++) {
+  let highestTimeoutId = setTimeout(";");
+  for (let i = 0 ; i < highestTimeoutId ; i++) {
     clearTimeout(i);
   }
 }
@@ -217,7 +219,7 @@ function checkChanges(){
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
   //If the snake is not invincible, it can lose the game
-  if(invincible == false){
+  if(game.invincible == false){
     if((snakeTop <= -1) || (snakeTop >= $('#game-state').height())){
      endGame();
    }
@@ -231,11 +233,11 @@ function snakeCollision(){
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
 
-  if(invincible == false){
+  if(game.invincible == false){
     switch(direction){
       case 'right':
       //If the snake is moving from the left to right (direction right), it can only lose when the top positions are equal and the left of the head is 10px to the left of the left position of snake[i]
-        for(var i=1; i<snake.length;i++){
+        for(let i=1; i<snake.length;i++){
           if(snakeTop == snake[i].position().top && snakeLeft+10 == snake[i].position().left){
             endGame();
           }
@@ -243,7 +245,7 @@ function snakeCollision(){
         break
       case 'left':
       //If the snake is moving from the right to left (direction left), it can only lose when the top positions are equal and the left of the head is 10px to the right of the left position of snake[i]
-        for(var i=1; i<snake.length;i++){
+        for(let i=1; i<snake.length;i++){
           if(snakeTop == snake[i].position().top && snakeLeft-10 == snake[i].position().left){
             endGame();
           }
@@ -251,7 +253,7 @@ function snakeCollision(){
         break
       case 'up':
       //If the direction is up, the snake can only lose if the top of the head of the snake is 10px higher than the top of snake[i]. It must also have equal value of left
-        for(var i=1; i<snake.length;i++){
+        for(let i=1; i<snake.length;i++){
           if(snakeTop-10 == snake[i].position().top && snakeLeft == snake[i].position().left){
             endGame();
           }
@@ -259,7 +261,7 @@ function snakeCollision(){
         break
       case 'down':
       //If the direction is down, the snake can only lose if the top of the head of the snake is 10px lower than the top of snake[i]. It must also have equal value of left
-        for(var i=1; i<snake.length;i++){
+        for(let i=1; i<snake.length;i++){
           if(snakeTop+10 == snake[i].position().top && snakeLeft == snake[i].position().left){
             endGame();
           }
@@ -313,39 +315,38 @@ function move(){
 }
 
 //The default color of the snake. Gets more red as the tail grows.
-
+//
 function colorSnake(){
-  var r = 0;
+  if(game.invincible == true){
+    setInterval(function(){
+      let r = Math.floor(Math.random()*255);
+      let g = Math.floor(Math.random()*255);
+      let b = Math.floor(Math.random()*255);
 
-  for(var i=0;i<snake.length;i++){
-    snake[i].css('background','rgb('+r+',0,0)');
-    r+=2;
+      for(let i=0;i<snake.length;i++){
+        snake[i].css('background','rgb('+r+','+g+','+b+')');
+      }
+    }, 100);
+  }
+  if(game.invincible == false) {
+    let r = 0;
+    for(let i=0;i<snake.length;i++){
+      snake[i].css('background','rgb('+r+',0,0)');
+      r+=2;
+    }
   }
 }
 
 //The star will have a random color. This is called in the 80ms interval
 function colorStar(){
-  var r = Math.floor(Math.random()*255);
-  var g = Math.floor(Math.random()*255);
-  var b = Math.floor(Math.random()*255);
-
-  $('polygon').css('fill','rgb('+r+','+g+','+b+')');
+  let r = Math.floor(Math.random()*255);
+  let g = Math.floor(Math.random()*255);
+  let b = Math.floor(Math.random()*255);
+  $('#star').css('background-color','rgb('+r+','+g+','+b+')');
 }
 
 
 //When Snake is invincible, it flashes random colors;
-function randomSnake(){
-
-  if(invincible != false){
-    var r = Math.floor(Math.random()*255);
-    var g = Math.floor(Math.random()*255);
-    var b = Math.floor(Math.random()*255);
-
-    for(var i=0;i<snake.length;i++){
-      snake[i].css('background','rgb('+r+','+g+','+b+')');
-    }
-  }
-}
 
 function winCondition(){
   if(snake.length == $('#game-state').height() * $('#game-state').width()/100){
@@ -372,7 +373,7 @@ function instructions(){
 }
 
 function startGame(){
-  var timer = 5;
+  let timer = 5;
   $('#start').animate({
     'opacity': '0',
     'z-index': '0'
@@ -416,23 +417,24 @@ $(document).ready(function(){
 
   placeSnack();
 
-  placeStar();
+  // setTimeout(function(){
+    placeStar();
+  // }, 60000);
 
   restart();
-  
-  checkStar();
+
   setInterval(function(){
     move();
-    colorSnake();
-    randomSnake();
     colorStar();
-  }, 80);
+    colorSnake();
+  }, 100);
 
   setInterval(function(){
     checkSnack();
+    checkStar();
     checkChanges();
     snakeCollision();
-    checkStar();
   }, 10);
 
+  winCondition();
 });
