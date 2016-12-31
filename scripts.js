@@ -175,36 +175,33 @@ function checkStar(){
   //This function checks to see if a star has been eaten
   snakeTop = snake[0].position().top;
   snakeLeft = snake[0].position().left;
-  let starTop;
-  let starLeft;
-  if($('#star').position().top != undefined){
-    starTop = $('#star').position().top;
-  }
-  if($('#star').position().left != undefined){
-    starLeft = $('#star').position().left;
-  }
+
+  let starTop = $('#star').position().top;
+
+  let starLeft = $('#star').position().left;
 
   if(snakeTop == starTop && snakeLeft == starLeft){
-    $('#star').remove();
-    game.invincible = true;
-    console.log(game.invincible);
-
-    setTimeout(function(){
-
-      game.invincible = false;
-      console.log(game.invincible);
-
-    }, 10000);
-    setTimeout(function(){
-      placeStar();
-    }, 60000);
-
-    $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
-    setTimeout(function(){
-      $('#starpower').remove();
-    }, 10000);
+    makeSnakeInvincible();
   }
 }
+
+function makeSnakeInvincible(){
+  $('#star').remove();
+  game.invincible = true;
+
+  setTimeout(function(){
+    placeStar();
+  }, 60000);
+
+  $('body').append('<audio autoplay="autoplay" id="starpower" src="./Audio/Star Power.m4a"></audio>');
+
+  setTimeout(function(){
+    $('#starpower').remove();
+    game.invincible = false;
+    colorSnake();
+  }, 10000);
+}
+
 
 function disablePlay() {
   //Clears all timeouts.
@@ -222,6 +219,7 @@ function checkChanges(){
   if(game.invincible == false){
     if((snakeTop <= -1) || (snakeTop >= $('#game-state').height())){
      endGame();
+     let r = 0;
    }
    else if((snakeLeft <= -1) || (snakeLeft >= $('#game-state').width())){
      endGame();
@@ -316,24 +314,23 @@ function move(){
 
 //The default color of the snake. Gets more red as the tail grows.
 //
-function colorSnake(){
-  if(game.invincible == true){
-    setInterval(function(){
-      let r = Math.floor(Math.random()*255);
-      let g = Math.floor(Math.random()*255);
-      let b = Math.floor(Math.random()*255);
+function randomSnake(){
+  if(game.invincible != false){
+    let r = Math.floor(Math.random()*255);
+    let g = Math.floor(Math.random()*255);
+    let b = Math.floor(Math.random()*255);
 
-      for(let i=0;i<snake.length;i++){
-        snake[i].css('background','rgb('+r+','+g+','+b+')');
-      }
-    }, 100);
-  }
-  if(game.invincible == false) {
-    let r = 0;
     for(let i=0;i<snake.length;i++){
-      snake[i].css('background','rgb('+r+',0,0)');
-      r+=2;
+      snake[i].css('background','rgb('+r+','+g+','+b+')');
     }
+  }
+}
+
+function colorSnake(){
+  let r = 0;
+  for(let i=0;i<snake.length;i++){
+    snake[i].css('background','rgb('+r+',0,0)');
+    r+=2;
   }
 }
 
@@ -424,6 +421,7 @@ $(document).ready(function(){
   restart();
 
   setInterval(function(){
+    randomSnake();
     move();
     colorStar();
     colorSnake();
@@ -434,7 +432,7 @@ $(document).ready(function(){
     checkStar();
     checkChanges();
     snakeCollision();
-  }, 10);
+  }, 1);
 
   winCondition();
 });

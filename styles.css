@@ -3,6 +3,8 @@ body {
   background-size: cover;
   display: flex;
   z-index: 0;
+  height: 100vh;
+  width: 100vw;
   font-family: 'Montserrat Subrayada', sans-serif;
 }
 
@@ -58,8 +60,8 @@ body {
   top: 0;
   z-index: 2;
   opacity: 1;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: -webkit-linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
   background: -moz-linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
   background: -linear-gradient(left,rgba(0,0,0,0.5),rgba(0,0,0,0.8),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0.8),rgba(0,0,0,0.5));
@@ -156,6 +158,10 @@ body {
 }
 
 @media only screen and (max-height: 600px){
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
   #game-state{
     height: 400px;
     width: 400px;
@@ -163,6 +169,10 @@ body {
 }
 
 @media only screen and (max-height: 500px){
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
   #game-state{
     height: 300px;
     width: 300px;
@@ -170,6 +180,10 @@ body {
 }
 
 @media only screen and (max-height: 400px){
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
   #game-state{
     height: 200px;
     width: 200px;
